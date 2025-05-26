@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevHabit.API", "DevHabit.API\DevHabit.API.csproj", "{CE8FD12B-7F21-4CAB-824C-F53BE18784AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2F27054B-110D-489A-B9B3-8D03B1569BF0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE8FD12B-7F21-4CAB-824C-F53BE18784AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE8FD12B-7F21-4CAB-824C-F53BE18784AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE8FD12B-7F21-4CAB-824C-F53BE18784AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE8FD12B-7F21-4CAB-824C-F53BE18784AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CE8FD12B-7F21-4CAB-824C-F53BE18784AC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE6B55C2-B54B-4D76-98AA-8DF43418712B}
+	EndGlobalSection
+EndGlobal
