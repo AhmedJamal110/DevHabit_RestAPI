@@ -7,6 +7,7 @@ public static class DependencyInjection
         {
             option.ReturnHttpNotAcceptable = true;
         })
+            .AddNewtonsoftJson()   // To Apply Patch request
          .AddXmlSerializerFormatters();
           
         builder.Services.AddOpenApi();

@@ -19,9 +19,5 @@ public static class DatabaseExtension
             app.Logger.LogError(ex, "An error occurred while applying database migrations.");
             throw;
         }
-
-
-
-
     }
 }
