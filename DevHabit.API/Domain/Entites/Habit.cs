@@ -12,8 +12,11 @@ public sealed class Habit
     public HabitStatus Status { get; set; }
     public bool IsArchived { get; set; }
     public DateOnly? EndDate { get; set; }
-    public Milestone? Milestone { get; set; }
+    public Milestone? Milestone { get; set; } 
     public DateTime CreatedAtUtc { get; set; }
     public DateTime? UpdatedAtUtc { get; set; }
     public DateTime? LastCompletedAtUtc { get; set; }
+
+    public ICollection<HabitTag> HabitTags { get; set; }
+    public ICollection<Tag>tags { get; set; } 
 }
