@@ -11,7 +11,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
     public async Task<IActionResult> GetAll()
     {
 
-        List<HabitDto> habitDtos = await _context.habits
+        List<HabitDto> habitDtos = await _context.Habits
             .Select(HabitQueries.ProjectToDto())
             .ToListAsync();
 
@@ -27,7 +27,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
     public async Task<IActionResult> Get(string id)
     {
 
-        HabitDto? habitDto = await _context.habits
+        HabitDto? habitDto = await _context.Habits
             .Where(h => h.Id == id)
             .Select(HabitQueries.ProjectToDto())
             .FirstOrDefaultAsync();
@@ -46,7 +46,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
 
         Habit habit = request.ToHabitEntity();
         
-        await _context.habits.AddAsync(habit);
+        await _context.Habits.AddAsync(habit);
         await _context.SaveChangesAsync();
 
         var habitDto = habit.ToHabitDto();
@@ -57,7 +57,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(string id, UpdateHabitDto request)
     {
-        Habit? habit = await _context.habits.FirstOrDefaultAsync(h => h.Id == id);
+        Habit? habit = await _context.Habits.FirstOrDefaultAsync(h => h.Id == id);
 
         if(habit is null)
         {
@@ -72,7 +72,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
     [HttpPatch("{id}")]
     public async Task<IActionResult> Patch(string id , JsonPatchDocument<HabitDto> patchDocument)
     {
-        Habit? habit = await _context.habits.FirstOrDefaultAsync(h => h.Id == id);
+        Habit? habit = await _context.Habits.FirstOrDefaultAsync(h => h.Id == id);
        
         if (habit is null)
         {
@@ -118,7 +118,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
-        Habit? habit = await _context.habits.FirstOrDefaultAsync(h => h.Id == id);
+        Habit? habit = await _context.Habits.FirstOrDefaultAsync(h => h.Id == id);
         
         if (habit is null)
         {
@@ -127,7 +127,7 @@ public sealed class HabitsController(ApplicationDbContext _context) : Controller
             return NotFound();
         }
 
-        _context.habits.Remove(habit);
+        _context.Habits.Remove(habit);
         await _context.SaveChangesAsync();
 
         return NoContent();

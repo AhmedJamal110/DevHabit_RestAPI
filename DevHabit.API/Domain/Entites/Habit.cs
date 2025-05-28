@@ -17,6 +17,6 @@ public sealed class Habit
     public DateTime? UpdatedAtUtc { get; set; }
     public DateTime? LastCompletedAtUtc { get; set; }
 
-    public ICollection<HabitTag> HabitTags { get; set; }
+    public List<HabitTag> HabitTags { get; set; } = new List<HabitTag>();
     public ICollection<Tag>tags { get; set; } 
 }
