@@ -30,6 +30,30 @@ public static class DependencyInjection
         return builder;
     }
 
+    public static WebApplicationBuilder AddValidation(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        builder.Services.AddProblemDetails(options =>
+        {
+            options.CustomizeProblemDetails = context =>
+            {
+                context.ProblemDetails.Extensions
+                .TryAdd("requestId", context.HttpContext.TraceIdentifier);
+            };
+        });
+
+
+        return builder;
+    }
+    public static WebApplicationBuilder AddException(this WebApplicationBuilder builder)
+    {
+        builder.Services
+            .AddExceptionHandler<GlobalExceptionHandler>()
+            .AddExceptionHandler<ValidationExceptionHandler>();
+
+        return builder;
+    }
     public static WebApplicationBuilder AddObservability(this WebApplicationBuilder builder)
     {
         builder.Services.AddOpenTelemetry()

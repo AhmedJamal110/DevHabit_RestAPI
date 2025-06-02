@@ -5,6 +5,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder
     .AddControllers()
     .AddDatabase()
+    .AddValidation()
+    .AddException()
     .AddObservability();
 
 WebApplication app = builder.Build();
@@ -16,5 +18,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseExceptionHandler();
 app.MapControllers();
 await app.RunAsync();
