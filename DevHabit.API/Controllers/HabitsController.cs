@@ -1,4 +1,6 @@
-﻿using DevHabit.API.Mapping;
+﻿using DevHabit.API.Contracts.Comman;
+using DevHabit.API.Mapping;
+using DevHabit.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace DevHabit.API.Controllers;
@@ -8,23 +10,25 @@ namespace DevHabit.API.Controllers;
 public sealed class HabitsController(ApplicationDbContext _context) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] HabitQueryParamter query)
+    public async Task<IActionResult> GetAll(
+        [FromQuery] HabitQueryParamter query,
+        SortMapiingProvider sortMapiingProvider)
     {
         query.Search ??= query.Search?.Trim().ToLower();
 
+        SortMapping[] sortMappings = sortMapiingProvider.GetMapping < Habit, HabitDto >();
+
         List<HabitDto> habitDtos = await _context.Habits
-            .Where(h => query.Search == null || 
-                         h.Name.ToLower().Contains(query.Search)  ||
+            .Where(h => query.Search == null ||
+                         h.Name.ToLower().Contains(query.Search) ||
                          h.Description != null && h.Description.ToLower().Contains(query.Search))
-            .Where(h =>  query.Type == null ||  h.Type == query.Type)
+            .Where(h => query.Type == null || h.Type == query.Type)
             .Where(h => query.Status == null || h.Status == query.Status)
+            .ApplySort(query.Sort, sortMappings)
             .Select(HabitQueries.ProjectToDto())
             .ToListAsync();
 
-        if(habitDtos.Count == 0)
-        {
-            return NotFound();
-        }
+
 
         return Ok(habitDtos);
     }

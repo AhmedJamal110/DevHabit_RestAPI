@@ -2,7 +2,9 @@
 
 namespace DevHabit.API.Middelwares;
 
-public sealed class GlobalExceptionHandler(IProblemDetailsService problemDetailsService) : IExceptionHandler
+public sealed class GlobalExceptionHandler(
+    IProblemDetailsService problemDetailsService,
+    IHostEnvironment environment) : IExceptionHandler
 {
     public ValueTask<bool> TryHandleAsync(HttpContext httpContext, 
         Exception exception,
@@ -16,8 +18,11 @@ public sealed class GlobalExceptionHandler(IProblemDetailsService problemDetails
             ProblemDetails = new ProblemDetails()
             {
                 Title = "Internal Server Error",
-                Detail = "An unexpected error occurred. Please try again later.",
+                Detail = environment.IsDevelopment()
+                    ? exception.Message
+                    : "An unexpected error occurred. Please try again later."
             }
+
         });
     }
 }
